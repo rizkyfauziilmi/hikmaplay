@@ -1,0 +1,6 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Run lint-staged to format and lint staged files before commit.
+# Uses --no-install so it fails fast if lint-staged isn't installed.
+npx --no-install lint-staged

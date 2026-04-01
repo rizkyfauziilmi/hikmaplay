@@ -1,0 +1,59 @@
+# Prettier ignore — files and folders that should not be formatted
+# Uses same syntax as .gitignore
+
+# Dependencies
+node_modules/
+
+# Build / output folders
+.next/
+out/
+dist/
+build/
+.vercel/
+.svelte-kit/
+.public-build/
+# Drizzle / generated code (adjust if different)
+lib/generated/
+prisma/generated/
+
+# Coverage and test artifacts
+coverage/
+.nyc_output/
+
+# Git, husky and related
+.git/
+.husky/
+
+# Lock & package manager files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Environment files
+.env
+.env.*.local
+
+# Editor/OS files
+.DS_Store
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Bundles / maps / minified
+*.min.js
+*.bundle.js
+*.map
+
+# Static assets that don't need formatting (adjust as needed)
+public/assets/
+public/**/*.svg
+
+# Backup files
+*~
+*.swp
+*.swo
