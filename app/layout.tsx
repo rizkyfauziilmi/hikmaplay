@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
+import { TRPCReactProvider } from "@/lib/server/trpc/client";
 
 const notoSans = Noto_Sans({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -49,7 +50,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <TooltipProvider>
-            <main>{children}</main>
+            <TRPCReactProvider>
+              <main>{children}</main>
+            </TRPCReactProvider>
             <Toaster />
           </TooltipProvider>
         </ThemeProvider>
