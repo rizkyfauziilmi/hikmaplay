@@ -1,7 +1,5 @@
 "use client";
 
-import * as React from "react";
-
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -10,7 +8,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
-export function NavSecondary({
+export function NavPrimary({
   items,
   ...props
 }: {

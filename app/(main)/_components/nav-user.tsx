@@ -2,7 +2,6 @@
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -167,8 +166,15 @@ function NavUserSignInButton() {
   const router = useRouter();
 
   return (
-    <Button variant="outline" onClick={() => router.push("/sign-in")}>
-      <LogInIcon /> Sign In
-    </Button>
+    <SidebarMenu>
+      <SidebarMenuItem>
+        <SidebarMenuButton
+          tooltip="Sign In"
+          onClick={() => router.push("/sign-in")}
+        >
+          <LogInIcon /> Sign In
+        </SidebarMenuButton>
+      </SidebarMenuItem>
+    </SidebarMenu>
   );
 }

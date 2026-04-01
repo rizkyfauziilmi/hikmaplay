@@ -22,10 +22,10 @@ import {
   StepForwardIcon,
   HomeIcon,
 } from "lucide-react";
-import { NavPrimary } from "./nav-projects";
 import { NavSecondary } from "./nav-secondary";
 import { NavUser } from "./nav-user";
 import Image from "next/image";
+import { NavPrimary } from "./nav-primary";
 
 const data = {
   navMain: [
@@ -134,32 +134,32 @@ const data = {
   ],
   primary: [
     {
-      name: "Home",
+      title: "Home",
       url: "#",
       icon: <HomeIcon />,
     },
     {
-      name: "Continue Watching",
+      title: "Continue Watching",
       url: "#",
       icon: <StepForwardIcon />,
     },
     {
-      name: "Browse",
+      title: "Browse",
       url: "#",
       icon: <GlobeIcon />,
     },
     {
-      name: "My Notes",
+      title: "My Notes",
       url: "#",
       icon: <NotebookTextIcon />,
     },
     {
-      name: "Bookmarks",
+      title: "Bookmarks",
       url: "#",
       icon: <BookmarkIcon />,
     },
     {
-      name: "Recently Watched",
+      title: "Recently Watched",
       url: "#",
       icon: <HistoryIcon />,
     },
@@ -168,7 +168,7 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar variant="inset" {...props}>
+    <Sidebar variant="inset" collapsible="icon" {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -192,7 +192,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavPrimary projects={data.primary} />
+        <NavPrimary items={data.primary} />
         <NavSecondary items={data.secondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
