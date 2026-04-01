@@ -22,17 +22,13 @@ import {
   StepForwardIcon,
   HomeIcon,
 } from "lucide-react";
-import { NavPrimary } from "./nav-projects";
 import { NavSecondary } from "./nav-secondary";
 import { NavUser } from "./nav-user";
 import Image from "next/image";
+import { NavPrimary } from "./nav-primary";
+import logoImage from "@/public/logo.png";
 
 const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
   navMain: [
     // {
     //   title: "Playground",
@@ -120,7 +116,7 @@ const data = {
     //   ],
     // },
   ],
-  navSecondary: [
+  secondary: [
     {
       title: "Settings",
       url: "#",
@@ -139,32 +135,32 @@ const data = {
   ],
   primary: [
     {
-      name: "Home",
+      title: "Home",
       url: "#",
       icon: <HomeIcon />,
     },
     {
-      name: "Continue Watching",
+      title: "Continue Watching",
       url: "#",
       icon: <StepForwardIcon />,
     },
     {
-      name: "Browse",
+      title: "Browse",
       url: "#",
       icon: <GlobeIcon />,
     },
     {
-      name: "My Notes",
+      title: "My Notes",
       url: "#",
       icon: <NotebookTextIcon />,
     },
     {
-      name: "Bookmarks",
+      title: "Bookmarks",
       url: "#",
       icon: <BookmarkIcon />,
     },
     {
-      name: "Recently Watched",
+      title: "Recently Watched",
       url: "#",
       icon: <HistoryIcon />,
     },
@@ -173,20 +169,16 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar variant="inset" {...props}>
+    <Sidebar variant="inset" collapsible="icon" {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <a href="#">
-                {/*<div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                  <TerminalIcon className="size-4" />
-                </div>*/}
                 <Image
-                  src="/logo.png"
+                  src={logoImage}
                   alt="HikmaPlay Logo"
-                  width={32}
-                  height={32}
+                  className="size-8"
                 />
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">HikmaPlay</span>
@@ -200,11 +192,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavPrimary projects={data.primary} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
+        <NavPrimary items={data.primary} />
+        <NavSecondary items={data.secondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser />
       </SidebarFooter>
     </Sidebar>
   );
