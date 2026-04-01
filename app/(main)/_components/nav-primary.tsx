@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   SidebarGroup,
@@ -6,7 +6,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar";
+} from '@/components/ui/sidebar';
 
 export function NavPrimary({
   items,
