@@ -28,11 +28,6 @@ import { NavUser } from "./nav-user";
 import Image from "next/image";
 
 const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
   navMain: [
     // {
     //   title: "Playground",
@@ -120,7 +115,7 @@ const data = {
     //   ],
     // },
   ],
-  navSecondary: [
+  secondary: [
     {
       title: "Settings",
       url: "#",
@@ -179,9 +174,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <a href="#">
-                {/*<div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                  <TerminalIcon className="size-4" />
-                </div>*/}
                 <Image
                   src="/logo.png"
                   alt="HikmaPlay Logo"
@@ -201,10 +193,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavPrimary projects={data.primary} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
+        <NavSecondary items={data.secondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser />
       </SidebarFooter>
     </Sidebar>
   );

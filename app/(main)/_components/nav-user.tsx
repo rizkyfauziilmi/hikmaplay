@@ -1,10 +1,8 @@
-"use client"
+"use client";
 
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,25 +11,46 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from "@/components/ui/sidebar"
-import { ChevronsUpDownIcon, SparklesIcon, BadgeCheckIcon, CreditCardIcon, BellIcon, LogOutIcon } from "lucide-react"
+} from "@/components/ui/sidebar";
+import { Skeleton } from "@/components/ui/skeleton";
+import { generateUsernameFallback } from "@/lib/helpers/string";
+import { authClient } from "@/lib/server/auth/auth-client";
+import {
+  ChevronsUpDownIcon,
+  SparklesIcon,
+  BadgeCheckIcon,
+  CreditCardIcon,
+  BellIcon,
+  LogOutIcon,
+  LogInIcon,
+  AlertCircleIcon,
+} from "lucide-react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
-export function NavUser({
-  user,
-}: {
-  user: {
-    name: string
-    email: string
-    avatar: string
+export function NavUser() {
+  const { isMobile } = useSidebar();
+  const { data: session, isPending, error } = authClient.useSession();
+
+  if (isPending) {
+    return <NavUserSkeleton />;
   }
-}) {
-  const { isMobile } = useSidebar()
+
+  if (error) {
+    return <NavUserError />;
+  }
+
+  if (!session) {
+    return <NavUserSignInButton />;
+  }
+
+  const user = session.user;
 
   return (
     <SidebarMenu>
@@ -43,8 +62,10 @@ export function NavUser({
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarImage src={user.avatar} alt={user.name} />
-                <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                <AvatarImage src={user.image ?? ""} alt={user.name} />
+                <AvatarFallback className="rounded-lg">
+                  {generateUsernameFallback(user.name)}
+                </AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">{user.name}</span>
@@ -62,8 +83,10 @@ export function NavUser({
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage src={user.avatar} alt={user.name} />
-                  <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                  <AvatarImage src={user.image ?? ""} alt={user.name} />
+                  <AvatarFallback className="rounded-lg">
+                    {generateUsernameFallback(user.name)}
+                  </AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">{user.name}</span>
@@ -74,38 +97,78 @@ export function NavUser({
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>
-                <SparklesIcon
-                />
+                <SparklesIcon />
                 Upgrade to Pro
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>
-                <BadgeCheckIcon
-                />
+                <BadgeCheckIcon />
                 Account
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <CreditCardIcon
-                />
+                <CreditCardIcon />
                 Billing
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <BellIcon
-                />
+                <BellIcon />
                 Notifications
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <LogOutIcon
-              />
+            <DropdownMenuItem
+              onSelect={async () => {
+                await authClient.signOut({
+                  fetchOptions: {
+                    onSuccess: () => {
+                      toast.success("Logged out successfully");
+                    },
+                  },
+                });
+              }}
+            >
+              <LogOutIcon />
               Log out
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>
     </SidebarMenu>
-  )
+  );
+}
+
+function NavUserSkeleton() {
+  return (
+    <div className="flex w-fit items-center gap-2 mx-1.5">
+      <Skeleton className="size-9 shrink-0 rounded-full" />
+      <div className="grid gap-1">
+        <Skeleton className="h-4 w-25" />
+        <Skeleton className="h-4 w-35.5" />
+      </div>
+      <ChevronsUpDownIcon className="ml-auto size-4 text-muted-foreground" />
+    </div>
+  );
+}
+
+function NavUserError() {
+  return (
+    <Alert variant="destructive" className="w-full">
+      <AlertCircleIcon />
+      <AlertTitle>Failed to load user session.</AlertTitle>
+      <AlertDescription>
+        You may not be signed in. Please sign in to access your account.
+      </AlertDescription>
+    </Alert>
+  );
+}
+
+function NavUserSignInButton() {
+  const router = useRouter();
+
+  return (
+    <Button variant="outline" onClick={() => router.push("/sign-in")}>
+      <LogInIcon /> Sign In
+    </Button>
+  );
 }

@@ -41,7 +41,7 @@ export function LoginForm({
     >
       <Card className="w-full max-w-sm">
         <CardHeader className="text-center">
-          <CardTitle className="text-xl">Welcome back to HikmaPlay!</CardTitle>
+          <CardTitle className="text-xl">Sign In to HikmaPlay</CardTitle>
           <CardDescription>
             Sign in to get more features and access your personalized content.
           </CardDescription>
