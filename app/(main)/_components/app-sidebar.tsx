@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import * as React from "react";
+import * as React from 'react';
 
 import {
   Sidebar,
@@ -10,7 +10,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar";
+} from '@/components/ui/sidebar';
 import {
   Settings,
   HelpCircle,
@@ -21,12 +21,12 @@ import {
   GlobeIcon,
   StepForwardIcon,
   HomeIcon,
-} from "lucide-react";
-import { NavSecondary } from "./nav-secondary";
-import { NavUser } from "./nav-user";
-import Image from "next/image";
-import { NavPrimary } from "./nav-primary";
-import logoImage from "@/public/logo.png";
+} from 'lucide-react';
+import { NavSecondary } from './nav-secondary';
+import { NavUser } from './nav-user';
+import Image from 'next/image';
+import { NavPrimary } from './nav-primary';
+import logoImage from '@/public/logo.png';
 
 const data = {
   navMain: [
@@ -118,50 +118,50 @@ const data = {
   ],
   secondary: [
     {
-      title: "Settings",
-      url: "#",
+      title: 'Settings',
+      url: '#',
       icon: <Settings />,
     },
     {
-      title: "Help",
-      url: "#",
+      title: 'Help',
+      url: '#',
       icon: <HelpCircle />,
     },
     {
-      title: "Bug Report",
-      url: "#",
+      title: 'Bug Report',
+      url: '#',
       icon: <Bug />,
     },
   ],
   primary: [
     {
-      title: "Home",
-      url: "#",
+      title: 'Home',
+      url: '#',
       icon: <HomeIcon />,
     },
     {
-      title: "Continue Watching",
-      url: "#",
+      title: 'Continue Watching',
+      url: '#',
       icon: <StepForwardIcon />,
     },
     {
-      title: "Browse",
-      url: "#",
+      title: 'Browse',
+      url: '#',
       icon: <GlobeIcon />,
     },
     {
-      title: "My Notes",
-      url: "#",
+      title: 'My Notes',
+      url: '#',
       icon: <NotebookTextIcon />,
     },
     {
-      title: "Bookmarks",
-      url: "#",
+      title: 'Bookmarks',
+      url: '#',
       icon: <BookmarkIcon />,
     },
     {
-      title: "Recently Watched",
-      url: "#",
+      title: 'Recently Watched',
+      url: '#',
       icon: <HistoryIcon />,
     },
   ],
@@ -175,16 +175,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <a href="#">
-                <Image
-                  src={logoImage}
-                  alt="HikmaPlay Logo"
-                  className="size-8"
-                />
+                <Image src={logoImage} alt="HikmaPlay Logo" className="size-8" />
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">HikmaPlay</span>
-                  <span className="truncate text-xs">
-                    Learn Islam with Easy!
-                  </span>
+                  <span className="truncate text-xs">Learn Islam with Easy!</span>
                 </div>
               </a>
             </SidebarMenuButton>
