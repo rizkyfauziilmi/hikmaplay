@@ -4,7 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/theme-provider";
-import { MainLayout } from "./(main)/_layouts/main-layout";
+import { Toaster } from "@/components/ui/sonner";
 
 const notoSans = Noto_Sans({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -49,7 +49,8 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <TooltipProvider>
-            <MainLayout>{children}</MainLayout>
+            <main>{children}</main>
+            <Toaster />
           </TooltipProvider>
         </ThemeProvider>
       </body>
