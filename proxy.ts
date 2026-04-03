@@ -7,14 +7,14 @@ import { matchesRouteList } from './lib/helpers/route';
 export async function proxy(request: NextRequest) {
   const pathname = new URL(request.url).pathname;
 
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
   // Allow public routes regardless of auth state
   if (matchesRouteList(PUBLIC_ROUTES, pathname)) {
     return NextResponse.next();
   }
+
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
 
   // If user is already authenticated, prevent access to auth routes (e.g. sign-in)
   if (matchesRouteList(AUTH_ROUTES, pathname) && session) {
